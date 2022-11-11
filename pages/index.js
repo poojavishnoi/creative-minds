@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Message from "../components/message";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase";
+import {BsFillTrashFill} from 'react-icons/bs'
+import {AiFillEdit} from 'react-icons/ai'
 
 export default function Home() {
   const [allPost, setAllPost] = useState([]);
@@ -15,6 +17,8 @@ export default function Home() {
     });
     return unsunscribe;
   };
+
+
 
   useEffect(() => {
     getPosts();
@@ -30,9 +34,20 @@ export default function Home() {
 
       <div className="my-12 text-lg">
         <h2 className="font-medium">See what other people are thinking</h2>
-        {allPost.map((post) => (
-          <Message key={post.id} {...post}></Message>
-        ))}
+        {allPost.map((post) => {
+          return(<>
+          <Message key={post.id} {...post}>
+          {/* <div className="flex gap-4">
+          <button className="text-pink-600 flex items-center justify-center gap-2 py-2 text-sm">
+          <BsFillTrashFill className='text-2xl'/>
+          Delete</button>
+          <button className=" flex items-center justify-center gap-2 py-2 text-sm">
+          <AiFillEdit className='text-2xl' />
+          Edit</button>
+          </div> */}
+          </Message>
+          </>
+        )})}
       </div>
     </div>
   );
