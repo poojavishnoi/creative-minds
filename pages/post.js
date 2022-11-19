@@ -16,7 +16,6 @@ export default function post() {
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
   const routeData = route.query;
-  console.log(routeData);
 
   const submitPost = async (e) => {
     e.preventDefault();
@@ -51,8 +50,12 @@ export default function post() {
         avatar: user.photoURL,
         username: user.displayName,
       });
-
+      
       setPost({ description: "" });
+      toast.success("Post has been made 🚀🚀🚀", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return route.push("/");
     }
   };

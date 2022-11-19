@@ -34,7 +34,6 @@ export default function dashboard() {
       await deleteDoc(docRef);
     }
 
-  console.log(myPost);
 
   useEffect(() => {
     getData()
@@ -46,11 +45,11 @@ export default function dashboard() {
       <div>
         {
           myPost.map(post => {
-            return(<>
+            return(
           <Message key={post.id} {...post}>
           <div className='flex gap-4'>
           <button onClick={() => deletePost(post.id)} className="text-pink-600 flex items-center justify-center gap-2 pt-2 text-sm">
-          <BsFillTrashFill className='text-2xl'/>
+          <BsFillTrashFill className='text-xl'/>
           Delete</button>
           <Link href={{pathname:'/post', query:post}}>
           <button className="text-gray-600 flex items-center justify-center gap-2 pt-2 text-sm">
@@ -59,7 +58,6 @@ export default function dashboard() {
           </Link>
           </div>
           </Message>
-          </>
         )
           })
         }
